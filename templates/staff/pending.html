@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Pending Approval Page
+{% endblock %}
+
+{% block styles %}
+<style>
+    .pending-card {
+        max-width: 470px;
+        min-height: 275px;
+        text-align: center;
+        padding: 2rem;
+    }
+    .pending-card h1,
+    .pending-card h2 {
+        margin: 0;
+        color: var(--color-danger);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="main-container auth-layout">
+
+    <div class="form-card pending-card shadow-sm d-flex flex-column justify-content-center">
+
+        <h2 class="fw-bold mb-3">
+            Approval Pending
+        </h2>
+
+        <p>
+            Your staff account is currently under review.
+            Please wait for admin approval before accessing the dashboard.
+        </p>
+
+        <!-- Redirect Options -->
+        <div class="d-flex justify-content-center gap-2">
+
+            <a href="{{ url_for('main.landing') }}" class="btn btn-trek px-4">
+                <i class="bi bi-house-door me-2"></i>
+                Home
+            </a>
+
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-primary-custom px-4">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

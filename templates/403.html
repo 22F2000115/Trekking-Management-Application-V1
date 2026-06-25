@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+403 Forbidden Page
+{% endblock %}
+
+{% block styles %}
+<style>
+    .error-card {
+        max-width: 475px;
+        min-height: 300px;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .error-card h1 {
+        font-family: var(--font-body);
+        margin: 0;
+    }
+
+    .error-code {
+        font-size: 4.5rem;
+        font-weight: 700;
+        color: var(--color-danger);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="main-container auth-layout">
+
+    <div class="form-card error-card shadow-sm d-flex flex-column justify-content-center">
+
+        <h1 class="error-code">
+            403
+        </h1>
+
+        <h2 class="fw-bold">
+            Access Denied
+        </h2>
+
+        <p>
+            You do not have permission to access this page.
+        </p>
+
+        <!-- Redirect Options -->
+        <div class="d-flex justify-content-center gap-2">
+
+            <a href="{{ url_for('main.landing') }}" class="btn btn-trek px-4">
+                <i class="bi bi-house-door me-2"></i>
+                Home
+            </a>
+
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-muted-custom px-4">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Logout
+            </a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary-custom px-4">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                Login
+            </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}
