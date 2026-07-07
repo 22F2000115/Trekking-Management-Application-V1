@@ -23,13 +23,8 @@
 </head>
 
 <body>
-
-    <!-- Optional Navbar (We'll use this later in Admin, Staff, User Dashboards and all) -->
-    {% block navbar %}
-    {% endblock %}
-
-
-    <!-- Flash Messages(Global) - Dynamic -->
+    
+    <!-- Flash Messages(Global) -->
     <section id="flash-section">
         <div class="container">
             {% with messages = get_flashed_messages(with_categories=True) %}
@@ -46,7 +41,7 @@
     </section>
 
 
-    <!-- Main Block Contents will be replaced here -->
+    <!-- Main Block -->
     {% block content %}
     {% endblock %}
 

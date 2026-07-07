@@ -26,12 +26,14 @@ def create_app():
         # Ties SQLAlchemy to the Flask app.
         
     #* Blueprints imported and registered inside create_app — to avoid circular imports.
+    from controllers.admin import admin
     from controllers.auth import auth
     from controllers.main import main
     
     app.register_blueprint(auth) #Auth Blueprint
     app.register_blueprint(main) #Main Blueprint
-
+    app.register_blueprint(admin) #Admin Blueprint
+    
     return app
 
 app = create_app()

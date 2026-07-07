@@ -1,0 +1,199 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block page_title %}
+Staff Management
+{% endblock %}
+
+{% block admin_content %}
+<div class="container-fluid py-3">
+
+    <div class="mb-3">
+        <div>
+            <h2 class="mb-1">Staff Management</h2>
+            <p class="text-muted mb-0">
+                Manage staff approvals, account status and trek assignments.
+            </p>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+
+            <form method="GET" action="{{ url_for('admin.staff') }}">
+                <div class="input-group">
+
+                    <input type="text" name="q" class="form-control"
+                        placeholder="Search by ID, Name, Email or Approval Status..." value="{{ q }}">
+
+                    <button class="btn btn-admin" type="submit">
+                        <i class="bi bi-search me-2"></i>
+                        Search
+                    </button>
+
+                    {% if q %}
+                    <a href="{{ url_for('admin.staff') }}" class=" d-flex align-items-center btn btn-admin">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                    {% endif %}
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Staff Table -->
+    <div class="card shadow-sm">
+
+        <div class="card-body p-2">
+
+            {% if staff_list %}
+            <div class="table-responsive">
+
+                <table class="table text-center table-hover align-middle mb-0">
+
+                    <thead class="table-light align-middle">
+                        <tr>
+
+                            <th>ID</th>
+                            <th>
+                                <div>
+                                    Name
+                                </div>
+                                <small>
+                                    Email
+                                </small>
+                            </th>
+                            <th>Contact No</th>
+                            <th>Assigned Trek ID</th>
+                            <th>Approval Status</th>
+                            <th>Approval Actions</th>
+                            <th>Account Status</th>
+                            <th>Account Actions</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for staff in staff_list %}
+                        <tr>
+                            <td>
+                                {{ staff.id }}
+                            </td>
+
+                            <td>
+                                <div class="fw-semibold">
+                                    {{ staff.name }}
+                                </div>
+                                <small>
+                                    <i class="bi bi-envelope-check"></i>
+                                    {{ staff.email }}
+                                </small>
+                            </td>
+
+                            <td>
+                                <i class="bi bi-telephone-fill"></i>
+                                {{ staff.contact_no }}
+                            </td>
+
+                            <td>{% if staff.assigned_treks %}
+                                {% for trek in staff.assigned_treks %}
+                                <span class="fw-semibold">
+                                    {{ trek.id }}{% if not loop.last %}, {% endif %}
+                                </span>
+                                {% endfor %}
+                                {% else %}
+                                <span class="fw-semibold">
+                                    Unassigned
+                                </span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <span class="text-{{ staff.staff_profile.approval_status|lower }}">
+                                    {{ staff.staff_profile.approval_status }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <form method="POST" action="{{ url_for('admin.approve_staff', user_id=staff.id) }}">
+
+                                        <button type="submit" class="btn btn-sm btn-success-custom" 
+                                        {% if staff.staff_profile.approval_status=='Approved' or staff.status=='Blacklisted' %}disabled{% endif %}>
+                                            Approve
+                                        </button>
+
+                                    </form>
+
+                                    <form method="POST" action="{{ url_for('admin.reject_staff', user_id=staff.id) }}">
+
+                                        <button type="submit" class="btn btn-sm btn-danger-custom" 
+                                        {% if staff.staff_profile.approval_status=='Rejected' or staff.status=='Blacklisted' %}disabled{% endif %}>
+                                            Reject
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="text-{{ staff.status|lower }}">
+                                    {{ staff.status }}
+                                </span>
+                            </td>
+
+
+
+                            <td>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                                    <form method="POST"
+                                        action="{{ url_for('admin.blacklist_staff', user_id=staff.id) }}">
+
+                                        <button type="submit" class="btn btn-sm btn-admin" 
+                                        {% if staff.status=='Blacklisted' %}disabled{% endif %}>
+                                            Blacklist
+                                        </button>
+                                    </form>
+
+                                    <form method="POST"
+                                        action="{{ url_for('admin.activate_staff', user_id=staff.id) }}">
+
+                                        <button type="submit" class="btn btn-sm btn-activate-custom" 
+                                        {% if staff.status=='Active' %}disabled{% endif %}>
+                                            Activate
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-person-workspace display-4 text-muted"></i>
+                <h5 class="mt-3">
+                    No Staff Members Found
+                </h5>
+                <p class="text-muted">
+                    Try another search keyword.
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

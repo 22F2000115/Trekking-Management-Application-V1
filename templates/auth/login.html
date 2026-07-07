@@ -15,7 +15,7 @@ Login Page
 {% block content %}
 <section class="main-container auth-layout">
 
-    <div class="form-card shadow-sm">
+    <div class="form-card shadow">
 
         <div class="text-center mb-4">
             <h1 class="h3 mb-0">Welcome Back</h1>
@@ -24,7 +24,7 @@ Login Page
             </p>
         </div>
 
-        <!-- Login Form -->
+
         <form method="POST" action="{{ url_for('auth.login') }}">
 
             <div class="mb-3">
@@ -52,7 +52,7 @@ Login Page
 
         </form>
 
-        <!-- Register Links -->
+        
         <div class="small text-center">
 
             <p class="mb-1">

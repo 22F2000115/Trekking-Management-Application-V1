@@ -1,0 +1,182 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block page_title %}
+Bookings
+{% endblock %}
+
+{% block admin_content %}
+<div class="container-fluid py-3">
+
+    <div class="mb-3">
+        <h2 class="mb-1">
+            Booking Management
+        </h2>
+        <p class="text-muted mb-0">
+            View all trek bookings across the platform.
+        </p>
+    </div>
+
+    <!-- Search -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+
+            <form method="GET" action="{{ url_for('admin.bookings') }}">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control"
+                        placeholder="Search by Booking ID, User, Trek, Booking Status or Payment Status..."
+                        value="{{ q }}">
+
+                    <button class="btn btn-admin" type="submit">
+                        <i class="bi bi-search me-2"></i>
+                        Search
+                    </button>
+
+                    {% if q %}
+                    <a href="{{ url_for('admin.bookings') }}" class=" d-flex align-items-center btn btn-admin">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Booking Table -->
+    <div class="card shadow-sm">
+
+        <div class="card-body p-2">
+
+            {% if booking_list %}
+            <div class="table-responsive">
+
+                <table class="table text-center table-hover align-middle mb-0">
+
+                    <thead class="table-light align-middle">
+                        <tr>
+                            <th>ID</th>
+                            <th>
+                                <div>
+                                    User's Name
+                                </div>
+                                <small>
+                                    User's Email
+                                </small>
+                            </th>
+                            <th>
+                                <div>
+                                    Trek Name
+                                </div>
+                                <small>
+                                    Trek Location
+                                </small>
+                            </th>
+                            <th>Trek Status</th>
+                            <th>Assigned Staff</th>
+                            <th>Price</th>
+                            <th>Booking Status</th>
+                            <th>Payment Status</th>
+                            <th>Booked On</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for booking in booking_list %}
+                        <tr>
+                            <td>{{ booking.id }}</td>
+
+                            <td>
+                                <div class="fw-semibold">
+                                    {{ booking.user.name }}
+                                </div>
+                                <small>
+                                    <i class="bi bi-envelope-check"></i>
+                                    {{ booking.user.email }}
+                                </small>
+                            </td>
+
+                            <td>
+                                <div class="fw-semibold">
+                                    {{ booking.trek.name }}
+                                </div>
+                                <small>
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    {{ booking.trek.location }}
+                                </small>
+                            </td>
+
+                            <td>
+                                <span class="fw-semibold">
+                                    {{ booking.trek.status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if booking.trek.assigned_staff %}
+                                <span class="fw-semibold">
+                                    {{ booking.trek.assigned_staff.name }}
+                                </span>
+                                {% else %}
+                                <span class="text-blacklisted">
+                                    Unassigned
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td>₹ {{ booking.trek.price }}</td>
+
+                            <td>
+                                {% if booking.status == 'Booked' %}
+                                <span class="text-active">
+                                    Booked
+                                </span>
+                                {% else %}
+                                <span class="text-blacklisted">
+                                    Cancelled
+                                </span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if booking.payment_status == 'Paid' %}
+                                <span class="text-approved">
+                                    Paid
+                                </span>
+                                {% elif booking.payment_status == 'Refunded' %}
+                                <span class="text-active">
+                                    Refunded
+                                </span>
+                                {% else %}
+                                <span class="text-rejected">
+                                    Pending
+                                </span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {{ booking.booked_at.strftime('%d %B %Y') }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-list-check display-4 text-muted"></i>
+                <h5 class="mt-3">
+                    No Bookings Found
+                </h5>
+                <p class="text-muted">
+                    Booking records will appear here.
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

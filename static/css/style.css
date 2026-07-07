@@ -15,23 +15,15 @@
 
     --color-primary: #1F4F34;
     --color-primary-dark: #173B27;
-    --color-bg: #E8ECE6;
+    --color-bg: #F3F6F2;
     --color-surface: #FFFFFF;
     --color-text: #0A0A0A;
     --color-muted: #646D75;
     --color-border: #E4E7E2;
 
-    --color-success: #4F772D;
+    --color-success: #008000;
     --color-warning: #BC6C25;
     --color-danger:  #9D0208;
-}
-
-
-
-
-/* Global Text Colors */
-.text-muted {
-    color: var(--color-muted) !important;
 }
 
 
@@ -56,6 +48,64 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--color-text);
 }
+
+
+
+
+
+/* Global Text Colors */
+.text-muted {
+    color: var(--color-muted) !important;
+}
+
+.text-easy {
+    color: var(--color-success);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-moderate {
+    color: var(--color-warning);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-hard {
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-approved{
+    color: var(--color-success);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-pending{
+    color: var(--color-warning);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-rejected{
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.text-active{
+    color: #1D4ED8;
+    font-size: 0.9rem;
+    font-weight:700;
+}
+
+.text-blacklisted{
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight:700;
+}
+
 
 
 
@@ -96,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px;
     font-size: 0.85rem;
     margin-bottom: 0.5rem;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 #flash-section .alert-danger {
@@ -138,6 +188,26 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-surface);
 }
 
+.btn-success-custom {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    color: var(--color-surface);
+    transition: all 0.2s ease;
+}
+
+.btn-success-custom:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.btn-success-custom:disabled {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    color: var(--color-surface);
+    opacity: 0.6;
+}
+
 .btn-danger-custom {
     background-color: var(--color-danger);
     border-color: var(--color-danger);
@@ -146,35 +216,68 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-danger-custom:hover {
-    background-color: #b02a37;
-    border-color: #b02a37;
+    background-color: #850207;
+    border-color: #850207;
     color: var(--color-surface);
 }
 
+.btn-danger-custom:disabled {
+    background-color: var(--color-danger);
+    border-color: var(--color-danger);
+    color: var(--color-surface);
+    opacity: 0.6;
+}
+
 .btn-warning-custom {
-    background-color: var(--color-warning);
-    border-color: var(--color-warning);
+    background-color: #d4a033;
+    border-color: #d4a033;
     color: var(--color-text);
     transition: all 0.2s ease;
 }
 
 .btn-warning-custom:hover {
+    background-color: var(--color-warning);
+    border-color: var(--color-warning);
+}
+
+.btn-warning-custom:disabled {
     background-color: #d4a033;
     border-color: #d4a033;
     color: var(--color-text);
+    opacity: 0.6;
+}
+
+.btn-activate-custom {
+    background-color: #1D4ED8;
+    border-color: #1D4ED8;
+    color: var(--color-surface);
+    transition: all 0.2s ease;
+}
+
+.btn-activate-custom:hover {
+    background-color: #1A45C2;
+    border-color: #1A45C2;
+    color: var(--color-surface);
+}
+
+.btn-activate-custom:disabled {
+    background-color: #1A45C2;
+    border-color: #1A45C2;
+    color: var(--color-surface);
+    opacity: 0.6;
 }
 
 .btn-muted-custom {
-    background-color: transparent;
+    background-color: var(--color-border);
     border-color: var(--color-border);
-    color: var(--color-muted);
+    color: var(--color-text);
     transition: all 0.2s ease;
 }
 
 .btn-muted-custom:hover {
-    background-color: var(--color-border);
-    border-color: var(--color-border);
-    color: var(--color-text);
+    background-color: var(--color-muted);
+    border-color: var(--color-muted);
+    color: var(--color-surface);
 }
 
 
@@ -225,16 +328,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-admin {
-    background-color: #2B2D42;
-    border-color: #2B2D42;
+    background: #3F4E5A;
+    border-color: #3F4E5A;
     color: var(--color-surface);
     transition: all 0.2s ease;
 }
 
 .btn-admin:hover {
-    background-color: #1F2235;
-    border-color: #1F2235;
+    background: #33404A;
+    border-color: #33404A;
     color: var(--color-surface);
+}
+
+.btn-admin:disabled {
+    background: #3F4E5A;
+    border-color: #3F4E5A;
+    color: var(--color-surface);
+    opacity: 0.6;
 }
 
 
@@ -286,17 +396,6 @@ textarea:focus {
 
 
 
-/* Dashboard Sidebar */
-.sidebar {
-    width: 260px;
-    flex-shrink: 0;
-    background-color: var(--color-surface);
-    border-right: 1px solid var(--color-border);
-}
-
-
-
-
 /* Dashboard Shell */
 .app-shell {
     flex: 1;
@@ -319,4 +418,73 @@ textarea:focus {
 
 .home-card:hover {
     transform: translateY(-3px);
+}
+
+/* Dashboard Sidebar */
+.sidebar {
+    width: 270px;
+    flex-shrink: 0;
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+}
+
+
+/* Sidebar Navigation */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    padding: 0.5rem;
+    margin-bottom: 0.45rem;
+
+    border-radius: 5px;
+
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Hover */
+.sidebar .nav-link:hover {
+    background-color: #C4CEC0;
+    color: var(--color-text);
+}
+
+
+/* Active Link (same colors as primary button) */
+.sidebar .nav-link.active {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    font-weight: 600;
+}
+
+
+/* Branding */
+.sidebar h4 {
+    margin-bottom: 0.15rem;
+}
+
+.sidebar small {
+    letter-spacing: 1px;
+}
+
+
+/* Logout */
+.sidebar .logout {
+    color: var(--color-danger);
+}
+
+.sidebar .logout:hover {
+    color: var(--color-surface);
+    background-color: #D9485A;
+}
+
+.dashboard-stat {
+    font-family: var(--font-body);
+    color: var(--color-primary-dark);
+    font-weight: 600;
 }

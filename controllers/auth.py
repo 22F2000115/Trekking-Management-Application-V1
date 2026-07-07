@@ -21,12 +21,12 @@ def redirect_user_by_role(user):
             abort(403)
         
         if user.staff_profile.approval_status == 'Pending':
-            return redirect(url_for('staff.pending'))
+            return render_template('staff/pending.html')
         
         if user.staff_profile.approval_status == 'Rejected':
             logout_user()   # Always log out first if approval was rejected.
             flash('Your staff application has been rejected. Contact admin.', 'danger')
-            return redirect(url_for('auth.login'))
+            abort(403)
         
         if user.staff_profile.approval_status == 'Approved':
             return redirect(url_for('staff.dashboard'))
@@ -202,7 +202,7 @@ def login():
         if existing_user.role != 'Admin' and existing_user.status == 'Blacklisted':
             # Admin can never be blacklisted — check skipped for Admin
             flash('Your account has been blacklisted. Please Contact Admin!', 'danger')
-            return render_template('auth/login.html')
+            abort(403)
         
         login_user(existing_user)
         return redirect_user_by_role(existing_user)

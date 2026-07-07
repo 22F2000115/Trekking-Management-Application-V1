@@ -19,7 +19,7 @@ Register Staff Page
 {% block content %}
 <section class="main-container auth-layout">
 
-    <div class="form-card shadow-sm">
+    <div class="form-card shadow">
 
         <div class="text-center mb-4">
             <h1 class="h3 mb-0">Register as Trek Staff</h1>
@@ -28,10 +28,9 @@ Register Staff Page
             </p>
         </div>
 
-        <!-- Register Form -->
         <form method="POST" action="{{ url_for('auth.register_staff') }}">
 
-            <!-- Row 1 -->
+            <!-- R1 -->
             <div class="mb-3">
                 <label for="name" class="form-label">
                     <i class="bi bi-person"></i>
@@ -41,7 +40,7 @@ Register Staff Page
                     placeholder="Enter your full name" required>
             </div>
 
-            <!-- Row 2 -->
+            <!-- R2 -->
             <div class="row g-2 mb-2">
 
                 <div class="col-md-6">
@@ -64,7 +63,7 @@ Register Staff Page
 
             </div>
 
-            <!-- Row 3 -->
+            <!-- R3 -->
             <div class="row g-2 mb-2">
 
                 <div class="col-md-6">
@@ -87,7 +86,7 @@ Register Staff Page
 
             </div>
 
-            <!-- Row 4 -->
+            <!-- R4 -->
             <div class="text-end mb-3">
                 <label for="bio" class="form-label">
                     <i class="bi bi-card-text"></i>
@@ -104,7 +103,7 @@ Register Staff Page
 
         </form>
 
-        <!-- Register User Link and Login Link -->
+
         <div class="text-center">
 
             <p class="mb-1">
@@ -113,7 +112,6 @@ Register Staff Page
                     Create User Account
                 </a>
             </p>
-
             <p class="mb-0">
                 Already have an account?
                 <a href="{{ url_for('auth.login') }}">
