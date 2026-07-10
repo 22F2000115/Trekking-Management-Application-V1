@@ -51,6 +51,10 @@ TREK_DIFFICULTIES = ['Easy', 'Moderate', 'Hard']
 def get_approved_staff():
     return db.session.execute(db.select(User).join(StaffProfile, User.id == StaffProfile.user_id).where(User.role == 'Staff', User.status == 'Active', StaffProfile.approval_status == 'Approved')).scalars().all()
 
+# Returns the number of active (Booked) bookings for a trek
+def get_active_booking_count(trek_id):
+    return db.session.scalar(db.select(func.count(Booking.id)).where(Booking.trek_id == trek_id, Booking.status == 'Booked'))
+
 
 
 #Search Trek / Trek List
@@ -209,9 +213,19 @@ def edit_trek(trek_id):
             flash('Duration and slots must be positive. Price cannot be negative!', 'danger')
             return render_template('admin/edit_trek.html', trek = trek)
         
-        if not (0 <= available_slots <= total_slots):
-            flash('Available slots must be between 0 and total slots !', 'danger')
-            return render_template('admin/edit_trek.html', trek = trek)
+        # Total Slots can't be updated less than Active Bookings!
+        active_bookings = get_active_booking_count(trek.id)
+        
+        if total_slots < active_bookings:
+            flash(f'Total slots cannot be less than the {active_bookings} active bookings!', 'danger')
+            return render_template('admin/edit_trek.html', trek=trek)   
+        
+        # Available Slots <= (Total Slots - Active Bookings)
+        max_available_slots = total_slots - active_bookings
+        
+        if not (0 <= available_slots <= max_available_slots):
+            flash(f'Available slots must be between 0 and {max_available_slots} !', 'danger')
+            return render_template('admin/edit_trek.html', trek=trek)
         
         try:
             start = date.fromisoformat(start_date)

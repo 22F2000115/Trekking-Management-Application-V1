@@ -9,28 +9,28 @@ Add Trek
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h2 class="mb-1">
+            <h2 class="fw-semibold mb-1">
                 Add New Trek
             </h2>
-            <p class="text-muted mb-0">
+            <p class="mb-0 text-muted">
                 Create a new trekking activity and assign a trek staff.
             </p>
         </div>
 
         <a href="{{ url_for('admin.treks') }}" class="btn btn-admin">
-            <i class="bi bi-caret-left-fill me-2"></i>
-            Back to Treks
+            <i class="bi bi-caret-left-fill me-1"></i>
+            Treks
         </a>
     </div>
 
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm p-3">
         <div class="card-body">
 
             <form method="POST">
 
                 <div class="mb-3">
-                    <label class="form-label">
+                    <label class="form-label fw-semibold">
                         Trek Name
                     </label>
                     <input type="text" name="name" class="form-control" placeholder="Enter trek name" required>
@@ -38,7 +38,7 @@ Add Trek
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Location
                         </label>
                         <input type="text" name="location" class="form-control" placeholder="Enter trek location"
@@ -46,7 +46,7 @@ Add Trek
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Difficulty
                         </label>
 
@@ -66,7 +66,7 @@ Add Trek
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Duration (Days)
                         </label>
 
@@ -75,7 +75,7 @@ Add Trek
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Price (₹)
                         </label>
 
@@ -86,7 +86,7 @@ Add Trek
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Total Slots
                         </label>
 
@@ -95,13 +95,13 @@ Add Trek
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Assign Staff
                         </label>
 
                         <select name="assigned_staff_id" class="form-select">
                             <option value="">
-                                -- Unassigned --
+                                Unassigned
                             </option>
 
                             {% for staff in approved_staff %}
@@ -115,7 +115,7 @@ Add Trek
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Start Date
                         </label>
 
@@ -123,7 +123,7 @@ Add Trek
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             End Date
                         </label>
 
@@ -132,7 +132,7 @@ Add Trek
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label">
+                    <label class="form-label fw-semibold">
                         Description
                     </label>
 

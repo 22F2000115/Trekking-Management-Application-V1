@@ -29,10 +29,12 @@ def create_app():
     from controllers.admin import admin
     from controllers.auth import auth
     from controllers.main import main
+    from controllers.staff import staff
     
-    app.register_blueprint(auth) #Auth Blueprint
-    app.register_blueprint(main) #Main Blueprint
-    app.register_blueprint(admin) #Admin Blueprint
+    app.register_blueprint(auth)      #Authentication Blueprint
+    app.register_blueprint(main)      #Main Blueprint
+    app.register_blueprint(admin)     #Admin Blueprint
+    app.register_blueprint(staff)     #Staff Blueprint
     
     return app
 

@@ -9,10 +9,10 @@ Dashboard
 <div class="container-fluid py-3">
 
     <div class="mb-3">
-        <h2 class="mb-1">
+        <h2 class="fw-semibold mb-1">
             Admin Dashboard
         </h2>
-        <p class="text-muted mb-0">
+        <p class="mb-0 text-muted">
             Welcome back, {{ current_user.name }}.
             Here's an overview of your trekking management system.
         </p>
@@ -24,7 +24,7 @@ Dashboard
         <div class="col">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="fw-semibold mb-2">
                         Total Treks
                     </h5>
                     <h3 class="mb-0 dashboard-stat">
@@ -37,7 +37,7 @@ Dashboard
         <div class="col">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="fw-semibold mb-2">
                         Registered Users
                     </h5>
                     <h3 class="mb-0 dashboard-stat">
@@ -50,7 +50,7 @@ Dashboard
         <div class="col">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="fw-semibold mb-2">
                         Trek Staff
                     </h5>
                     <h3 class="mb-0 dashboard-stat">
@@ -63,7 +63,7 @@ Dashboard
         <div class="col">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="fw-semibold mb-2">
                         Pending Approval
                     </h5>
                     <h3 class="mb-0 dashboard-stat">
@@ -76,7 +76,7 @@ Dashboard
         <div class="col">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="fw-semibold mb-2">
                         Total Bookings
                     </h5>
                     <h3 class="mb-0 dashboard-stat">
@@ -93,9 +93,11 @@ Dashboard
     <div class="card shadow-sm">
 
         <div class="card-header d-flex justify-content-between align-items-center py-3">
-            <h4 class="mb-0">Recent Bookings</h4>
+            <h4 class="fw-bold mb-0">
+                Recent Bookings
+            </h4>
             <a href="{{ url_for('admin.bookings') }}" class="btn btn-admin">
-                View All Bookings<i class="bi bi-caret-right-fill ms-2"></i>
+                All Bookings<i class="bi bi-caret-right-fill ms-1"></i>
             </a>
         </div>
 
@@ -176,7 +178,7 @@ Dashboard
                                 {% endif %}
                             </td>
 
-                            <td>₹ {{ booking.trek.price }}</td>
+                            <td>₹{{ booking.trek.price }}</td>
 
                             <td>
                                 {% if booking.status == 'Booked' %}

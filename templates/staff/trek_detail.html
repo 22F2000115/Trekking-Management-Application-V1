@@ -1,0 +1,221 @@
+{% extends 'staff/staff_base.html' %}
+
+{% block page_title %}
+Trek Details
+{% endblock %}
+
+{% block staff_content %}
+<div class="container-fluid py-3">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+            <h2 class="mb-1 fw-semibold">
+                Trek Details
+            </h2>
+            <p class="mb-0 text-muted">
+                Manage operational details for your assigned trek.
+            </p>
+        </div>
+        <a href="{{ url_for('staff.dashboard') }}" class="btn btn-staff">
+            <i class="bi bi-caret-left-fill me-1"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Trek Details -->
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header d-flex justify-content-between align-items-center p-3">
+            <h3 class="mb-0 fw-semibold">
+                Trek Information
+            </h3>
+            <a href="{{ url_for('staff.participants', trek_id=trek.id) }}" class="btn btn-primary-custom">
+                <i class="bi bi-people-fill me-1"></i>
+                Participants
+            </a>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Name</span>
+                    <p class="mb-0">
+                        {{ trek.name }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Location</span>
+                    <p class="mb-0">
+                        <i class="bi bi-geo-alt-fill me-1"></i>
+                        {{ trek.location }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Difficulty</span>
+                    <p class="mb-0">
+                        {{ trek.difficulty }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Duration</span>
+                    <p class="mb-0">
+                        {{ trek.duration }} Days
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Price</span>
+                    <p class="mb-0">
+                        ₹{{ trek.price }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Available Slots / Total Slots</span>
+                    <p class="mb-0">
+                        {{ trek.available_slots }} / {{ trek.total_slots }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">Start Date</span>
+                    <p class="mb-0">
+                        {{ trek.start_date }}
+                    </p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <span class="fw-bold">End Date</span>
+                    <p class="mb-0">
+                        {{ trek.end_date }}
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="fw-bold">Status</span>
+                    <p class="mb-0 fw-semibold">
+                        {{ trek.status }}
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="fw-bold">Created On</span>
+                    <p class="mb-0">
+                        {{ trek.created_at.strftime('%d %B %Y') }}
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="fw-bold">Updated At</span>
+                    <p class="mb-0 fw-semibold">
+                        {{ trek.updated_at }}
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <span class="fw-bold">Description</span>
+            <p class="mb-0">
+                {{ trek.description or 'No description available.' }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="row justify-content-center g-4 mb-3">
+
+        <!-- Update Trek Status -->
+        <div class="col-lg-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header py-3">
+                    <h4 class="mb-0 fw-semibold">
+                        Update Trek Status
+                    </h4>
+                </div>
+                <div class="card-body p-3">
+
+                    <form method="POST" action="{{ url_for('staff.update_trek_status', trek_id=trek.id) }}">
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Trek Status
+                            </label>
+
+                            <select name="status" class="form-select">
+                                {% for status in staff_trek_statuses %}
+                                <option value="{{ status }}" 
+                                {% if trek.status==status %}selected{% endif %}>
+                                    {{ status }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-staff">
+                                <i class="bi bi-check-lg me-2"></i>
+                                Update Status
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Update Available Slots -->
+        <div class="col-lg-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header py-3">
+                    <h4 class="mb-0 fw-semibold">
+                        Update Available Slots
+                    </h4>
+                </div>
+                <div class="card-body p-3">
+
+                    <form method="POST" action="{{ url_for('staff.update_slots', trek_id=trek.id) }}">
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Available Slots
+                            </label>
+
+                            <input type="number" name="available_slots" class="form-control" min="0"
+                                value="{{ trek.available_slots }}" required>
+
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-staff">
+                                <i class="bi bi-check-lg me-2"></i>
+                                Update Slots
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
