@@ -5,32 +5,29 @@ Home Page
 {% endblock %}
 
 {% block content %}
-<section class="container py-5">
+<div class="auth-layout main-container">
     <div class="text-center py-5">
 
-        <h1 class="display-4 fw-semibold mb-1">
+        <h1 class="display-3 fw-bold mb-0">
             Adventure Awaits Beyond the Horizon
         </h1>
-        <p class="lead text-muted mb-1 mx-auto" style="font-size: large;">
-            Discover stunning trekking destinations, book guided expeditions, and experience nature like never before.
+        <hr>
+        <p class="lead mb-1 text-muted">
+            Discover breathtaking treks, book guided adventures, and explore the great outdoors.
         </p>
 
         <!-- Redirect Buttons -->
-        <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mt-3">
+        <div class="d-flex justify-content-center align-items-center gap-3 p-2">
 
-            <a href="#" class="btn btn-trek px-4 py-2">
-                <i class="bi bi-map me-2"></i>
-                Explore Treks
-            </a>
-            <a href="{{ url_for('auth.register_user') }}" class="btn btn-user px-4 py-2">
+            <a href="{{ url_for('auth.register_user') }}" class="btn btn-user">
                 <i class="bi bi-person-plus me-2"></i>
-                Join as Trekker
+                Register as Trekker
             </a>
-            <a href="{{ url_for('auth.register_staff') }}" class="btn btn-staff px-4 py-2">
+            <a href="{{ url_for('auth.register_staff') }}" class="btn btn-staff">
                 <i class="bi bi-person-workspace me-2"></i>
-                Become Staff
+                Register as Staff
             </a>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-primary-custom px-4 py-2">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary-custom">
                 <i class="bi bi-box-arrow-in-right me-2"></i>
                 Login
             </a>
@@ -38,45 +35,5 @@ Home Page
         </div>
 
     </div>
-</section>
-
-
-<!-- Featured Treks -->
-<section class="container py-3">
-    <div class="text-center mb-4">
-        <h2>Featured Treks</h2>
-        <p class="text-muted mb-0">
-            Handpicked adventures waiting for you.
-        </p>
-    </div>
-
-    <div class="row g-4">
-
-        <div class="col-md-4">
-            <div class="home-card shadow-sm">
-                <h4 class="mb-2">Kedarkantha</h4>
-                <p class="text-muted mb-0">
-                    Snow trekking in Uttarakhand.
-                </p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="home-card shadow-sm">
-                <h4 class="mb-2">Hampta Pass</h4>
-                <p class="text-muted mb-0">
-                    Cross valleys and alpine landscapes.
-                </p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="home-card shadow-sm">
-                <h4 class="mb-2">Valley of Flowers</h4>
-                <p class="text-muted mb-0">
-                    A monsoon paradise in the Himalayas.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</section>
+</div>
 {% endblock %}

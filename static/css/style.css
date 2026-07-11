@@ -15,7 +15,7 @@
 
     --color-primary: #1F4F34;
     --color-primary-dark: #173B27;
-    --color-bg: #F3F6F2;
+    --color-bg: #F7FAF6;
     --color-surface: #FFFFFF;
     --color-text: #0A0A0A;
     --color-muted: #646D75;
@@ -105,7 +105,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9rem;
     font-weight:700;
 }
-
 
 
 
@@ -228,25 +227,6 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.6;
 }
 
-.btn-warning-custom {
-    background-color: #d4a033;
-    border-color: #d4a033;
-    color: var(--color-text);
-    transition: all 0.2s ease;
-}
-
-.btn-warning-custom:hover {
-    background-color: var(--color-warning);
-    border-color: var(--color-warning);
-}
-
-.btn-warning-custom:disabled {
-    background-color: #d4a033;
-    border-color: #d4a033;
-    color: var(--color-text);
-    opacity: 0.6;
-}
-
 .btn-activate-custom {
     background-color: #1D4ED8;
     border-color: #1D4ED8;
@@ -283,23 +263,6 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Trekking Buttons */
-.btn-trek {
-    background-color: #003049;
-    border-color: #003049;
-    color: var(--color-surface);
-    transition: all 0.2s ease;
-}
-
-.btn-trek:hover {
-    background-color: #00263D;
-    border-color: #00263D;
-    color: var(--color-surface);
-}
-
-
-
-
 /* Separate Global Buttons For Users, Staff and Admin */
 .btn-user {
     background-color: #023E8A;
@@ -312,6 +275,13 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #012F6B;
     border-color: #012F6B;
     color: var(--color-surface);
+}
+
+.btn-user:disabled {
+    background-color: #023E8A;
+    border-color: #023E8A;
+    color: var(--color-surface);
+    opacity: 0.6;
 }
 
 .btn-staff {
@@ -378,12 +348,15 @@ textarea:focus {
 }
 
 
+
+
 /* Auth Page Layout */
 .auth-layout {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 
 
 
@@ -405,20 +378,7 @@ textarea:focus {
 
 
 
-
-/* Home Page Cards */
-.home-card {
-    width: 100%;
-    padding: 1.75rem;
-    border-radius: 10px;
-    background-color: var(--color-surface);
-    height: 100%;
-    transition: transform 0.2s ease;
-}
-
-.home-card:hover {
-    transform: translateY(-3px);
-}
+ 
 
 /* Dashboard Sidebar */
 .sidebar {
@@ -427,6 +387,8 @@ textarea:focus {
     background-color: var(--color-surface);
     border-right: 1px solid var(--color-border);
 }
+
+
 
 
 /* Sidebar Navigation */
@@ -447,33 +409,21 @@ textarea:focus {
     transition: all 0.2s ease;
 }
 
-
-/* Hover */
 .sidebar .nav-link:hover {
     background-color: #C4CEC0;
     color: var(--color-text);
 }
 
-
-/* Active Link (same colors as primary button) */
 .sidebar .nav-link.active {
     background-color: var(--color-primary);
     color: var(--color-surface);
     font-weight: 600;
 }
 
-
-/* Branding */
-.sidebar h4 {
-    margin-bottom: 0.15rem;
-}
-
 .sidebar small {
-    letter-spacing: 1px;
+    letter-spacing: 3px;
 }
 
-
-/* Logout */
 .sidebar .logout {
     color: var(--color-danger);
 }
@@ -483,6 +433,10 @@ textarea:focus {
     background-color: #D9485A;
 }
 
+
+
+
+/* Dashboard Card Font */
 .dashboard-stat {
     font-family: var(--font-body);
     color: var(--color-primary-dark);

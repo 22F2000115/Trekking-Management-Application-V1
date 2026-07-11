@@ -7,14 +7,30 @@ Bookings
 {% block staff_content %}
 <div class="container-fluid py-3">
 
-    <div class="mb-3">
-        <h2 class="fw-semibold mb-1">
-            Bookings
-        </h2>
-        <p class="mb-0 text-muted">
-            View and manage bookings across your assigned treks.
-        </p>
+    <div class="mb-3 card shadow p-3">
+        <div class="card-body">
+            <h2 class="fw-bold mb-3">
+                <i class="bi bi-bag-check me-1 small"></i>
+                Booking & Payment Instructions
+            </h2>
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                Manage participant payments carefully and update their <strong>Payment Status</strong> only after
+                verifying the payment directly.
+            </p>
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                Bookings cannot be cancelled once the Trek is <strong>Ongoing</strong>, has been
+                <strong>Completed</strong>, or has been <strong>Cancelled</strong>.
+            </p>
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                Once a booking has been <strong>Cancelled</strong>, it cannot be reverted or restored to its previous
+                booking status.
+            </p>
+        </div>
     </div>
+    <hr>
 
 
     <!-- Search -->
@@ -175,11 +191,23 @@ Bookings
 
 
                             <td>
-                                {{ booking.booked_at.strftime('%d %b %Y') }}
+                                {{ booking.booked_at.strftime('%d %B %Y') }}
                             </td>
 
                             <td>
-                                {% if booking.status == 'Booked' %}
+                                {% if booking.status == 'Cancelled' %}
+                                <span class="text-blacklisted">
+                                    Cancelled
+                                </span>
+
+                                {% elif booking.status == 'Booked' and booking.trek.status in ('Ongoing', 'Completed',
+                                'Cancelled') %}
+                                <button type="submit" class="btn btn-sm btn-danger-custom" disabled>
+                                    <i class="bi bi-trash3 me-1"></i>
+                                    Cancel
+                                </button>
+
+                                {% else %}
                                 <form method="POST"
                                     action="{{ url_for('staff.cancel_booking', booking_id=booking.id) }}">
 
@@ -191,11 +219,6 @@ Bookings
                                     </button>
 
                                 </form>
-
-                                {% else %}
-                                <span class="text-blacklisted">
-                                    Cancelled
-                                </span>
                                 {% endif %}
                             </td>
 
@@ -207,7 +230,7 @@ Bookings
 
                                         <input type="hidden" name="next" value="{{ request.full_path }}">
 
-                                        {% set payment_statuses = ["Pending", "Paid", "Refunded"] %}
+                                        {% set payment_statuses = ['Pending', 'Paid', 'Refunded'] %}
                                         <div class="input-group input-group-sm">
 
                                             <select name="payment_status" class="form-select">

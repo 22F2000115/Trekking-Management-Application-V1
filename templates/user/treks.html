@@ -1,0 +1,171 @@
+{% extends 'user/user_base.html' %}
+
+{% block page_title %}
+Browse Treks
+{% endblock %}
+
+{% block user_content %}
+<div class="container-fluid py-3">
+
+    <div class="mb-3">
+        <h2 class="fw-semibold mb-1">
+            Browse Treks
+        </h2>
+        <p class="mb-1 text-muted">
+            Explore available and upcoming treks. Book your next adventure.
+        </p>
+    </div>
+
+
+    <!-- Search & Filter -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+
+            <form method="GET" action="{{ url_for('user.treks') }}">
+                <div class="row g-2 align-items-center">
+
+                    <div class="col-md-9">
+                        <div class="input-group">
+
+                            <input type="text" name="q" class="form-control"
+                                placeholder="Search by Trek Name or Location..." value="{{ q }}">
+
+                            <button class="btn btn-user" type="submit">
+                                <i class="bi bi-search me-2"></i>
+                                Search
+                            </button>
+
+                            {% if q or selected_difficulty %}
+                            <a href="{{ url_for('user.treks') }}" class="d-flex align-items-center btn btn-user">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="input-group">
+
+                            <select name="difficulty" class="form-select">
+                                <option value="">All Difficulties</option>
+                                {% for difficulty in trek_difficulties %}
+                                <option value="{{ difficulty }}"
+                                    {% if selected_difficulty == difficulty %}selected{% endif %}>
+                                    {{ difficulty }}
+                                </option>
+                                {% endfor %}
+                            </select>
+
+                            <button class="btn btn-user" type="submit">
+                                <i class="bi bi-sliders2 ms-1"></i>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Trek Cards -->
+    {% if trek_list %}
+    <div class="row g-4 p-4">
+        {% for trek in trek_list %}
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+
+                <div class="card-header text-center py-3">
+                    <h4 class="fw-semibold mb-0">
+                        {{ trek.name }}
+                    </h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Location : </span>
+                        {{ trek.location }}
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Price : </span>
+                        ₹{{ trek.price }}
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Duration : </span>
+                        {{ trek.duration }} Days
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Start Date : </span>
+                        {{ trek.start_date }}
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Difficulty : </span>
+                        <span class="text-{{ trek.difficulty | lower }}">
+                            {{ trek.difficulty }}
+                        </span>
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">Available Slots : </span>
+                        <span class="fw-bold text-success">{{ trek.available_slots }}</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <span class="fw-bold">
+                            Total Slots : {{ trek.total_slots }}
+                        </span>
+                    </p>
+
+                    <p class="mb-0">
+                        <span class="fw-bold">Status : </span>
+                        {% if trek.status == 'Bookings Open' %}
+                        <span class="text-active">{{ trek.status }}</span>
+                        {% else %}
+                        <span class="text-blacklisted">{{ trek.status }}</span>
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                <div class="card-footer alig bg-white border-top p-3 text-center">
+                    <a href="{{ url_for('user.trek_detail', trek_id=trek.id) }}"
+                        class="btn btn-user w-100">
+                        <i class="bi bi-caret-right-fill me-1"></i>
+                        View Details
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="card shadow-sm">
+        <div class="card-body text-center py-5">
+
+            <i class="bi bi-signpost-fill display-4 text-muted"></i>
+            <h5 class="m-3">
+                No Treks Found.
+            </h5>
+            {% if q or selected_difficulty %}
+            <a href="{{ url_for('user.treks') }}" class="btn btn-user">
+                <i class="bi bi-x-lg me-2"></i>
+                Clear Filters
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

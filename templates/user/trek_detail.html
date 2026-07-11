@@ -1,0 +1,177 @@
+{% extends 'user/user_base.html' %}
+
+{% block page_title %}
+Trek Details
+{% endblock %}
+
+{% block user_content %}
+<div class="container-fluid py-3">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="mb-1 fw-semibold">
+                Trek Details
+            </h2>
+            <p class="mb-0 text-muted">
+                Full information about this trek.
+            </p>
+        </div>
+        <a href="{{ url_for('user.treks') }}" class="btn btn-user">
+            <i class="bi bi-caret-left-fill me-1"></i>
+            Browse Treks
+        </a>
+    </div>
+
+
+    <!-- Trek Information -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header d-flex justify-content-between align-items-center p-3">
+
+            <h3 class="mb-0 fw-semibold">
+                {{ trek.name }}
+            </h3>
+
+            {% if existing_booking %}
+            <div class="text-end">
+                <button class="btn btn-user" disabled>
+                    <i class="bi bi-calendar-check-fill me-2"></i>
+                    Book This Trek
+                </button>
+                <div>
+                    <small class="text-success fw-semibold">You have already booked this trek.</small>
+                </div>
+            </div>
+
+            {% elif trek.status == 'Approved' %}
+            <div class="text-end">
+                <button class="btn btn-muted" disabled>
+                    <i class="bi bi-calendar-check-fill me-2"></i>
+                    Book This Trek
+                </button>
+                <div>
+                    <small class="text-muted fw-semibold">Bookings have not started yet.</small>
+                </div>
+            </div>
+
+            {% elif trek.available_slots <= 0 %} <div class="text-end">
+                <button class="btn btn-muted" disabled>
+                    <i class="bi bi-calendar-check-fill me-2"></i>
+                    Book This Trek
+                </button>
+                <div>
+                    <small class="text-muted fw-semibold">No slots available for this trek.</small>
+                </div>
+        </div>
+
+        {% else %}
+        <form method="POST" action="{{ url_for('user.book_trek', trek_id=trek.id) }}">
+            <button type="submit" class="btn btn-user">
+                <i class="bi bi-calendar-check-fill me-2"></i>
+                Book This Trek
+            </button>
+        </form>
+        {% endif %}
+
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Location</span>
+                <p class="mb-0">
+                    <i class="bi bi-geo-alt-fill me-1"></i>
+                    {{ trek.location }}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Difficulty</span>
+                <p class="mb-0">
+                    <span class="text-{{ trek.difficulty | lower }}">
+                        {{ trek.difficulty }}
+                    </span>
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Duration</span>
+                <p class="mb-0">
+                    {{ trek.duration }} Days
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Price</span>
+                <p class="mb-0">
+                    ₹{{ trek.price }}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Available Slots</span>
+                <p class="mb-0 fw-semibold text-success">
+                    {{ trek.available_slots }}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Total Slots</span>
+                <p class="mb-0 fw-semibold">
+                    {{ trek.total_slots }}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Status</span>
+                <p class="mb-0 fw-semibold">
+                    {% if trek.status == 'Bookings Open' %}
+                    <span class="text-active">{{ trek.status }}</span>
+                    {% else %}
+                    <span class="text-blacklisted">{{ trek.status }}</span>
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">Start Date</span>
+                <p class="mb-0">
+                    {{ trek.start_date }}
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <span class="fw-bold">Assigned Staff</span>
+                <p class="mb-0 fw-semibold">
+                    {% if trek.assigned_staff %}
+                    {{ trek.assigned_staff.name }}
+                    {% else %}
+                    <span class="text-blacklisted">Not yet assigned</span>
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <span class="fw-bold">End Date</span>
+                <p class="mb-0">
+                    {{ trek.end_date }}
+                </p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <span class="fw-bold">Description</span>
+        <p class="mb-0">
+            {{ trek.description or 'No description available.' }}
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+{% endblock %}

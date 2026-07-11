@@ -83,10 +83,8 @@ def dashboard():
 @staff_required
 def trek_detail(trek_id):
     trek = get_assigned_trek(trek_id)
-    return render_template('staff/trek_detail.html',
-        trek = trek,
-        staff_trek_statuses = STAFF_TREK_STATUSES
-    )
+    
+    return render_template('staff/trek_detail.html', trek = trek, staff_trek_statuses = STAFF_TREK_STATUSES)
 
 
 #Update Trek Status
@@ -104,7 +102,7 @@ def update_trek_status(trek_id):
     try:
         trek.status = new_status
         
-        if new_status in ("Ongoing", "Completed", "Cancelled"):
+        if new_status in ('Ongoing', 'Completed', 'Cancelled'):
             trek.available_slots = 0
         
         db.session.commit()
@@ -191,9 +189,9 @@ def cancel_booking(booking_id):
     booking, trek = get_assigned_booking(booking_id)
 
     next_url = request.form.get('next', url_for('staff.participants', trek_id = trek.id))
-        #* Redirects back to wherever the action was triggered from — participants or bookings page
+        #* Redirects back to wherever the action was triggered from — Participants or Bookings Page
         
-    if trek.status in ("Ongoing", "Completed", "Cancelled"):
+    if trek.status in ('Ongoing', 'Completed', 'Cancelled'):
         flash('Bookings cannot be cancelled once the trek is ongoing, completed, or cancelled.', 'danger')
         return redirect(next_url)
 
@@ -204,8 +202,8 @@ def cancel_booking(booking_id):
     try:
         booking.status = 'Cancelled'
         trek.available_slots = min(trek.available_slots + 1, trek.total_slots)
-            #* Restore slot — capped at total_slots as a safety guard
-            #* payment_status is intentionally left untouched — staff handles refund manually
+            #* Restore slot — capped at total_slots!
+            #* Payment Status is intentionally left untouched — All Payments are Managed by Staff
         db.session.commit()
 
     except Exception:

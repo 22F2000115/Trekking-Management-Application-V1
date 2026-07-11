@@ -7,16 +7,31 @@ Staff Management
 {% block admin_content %}
 <div class="container-fluid py-3">
 
-    <div class="mb-3">
-        <div>
-            <h2 class="fw-semibold mb-1">
-                Staff Management
+    <div class="mb-3 card shadow p-3">
+        <div class="card-body">
+            <h2 class="fw-bold mb-3">
+                <i class="bi bi-person-slash me-1 small"></i>
+                Staff Management Instructions
             </h2>
-            <p class="mb-0 text-muted">
-                Manage staff approvals, account status and trek assignments.
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                <strong>Blacklisted</strong> Staff cannot be approved or rejected until their account has been
+                reactivated.
+            </p>
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                Blacklisting a Staff member will automatically <strong>Reject</strong> their approval and unassign
+                them from applicable Treks, except <strong>Ongoing</strong>, <strong>Completed</strong>, or
+                <strong>Cancelled</strong> Treks.
+            </p>
+            <p class="mb-1">
+                <i class="bi bi-dot"></i>
+                Reactivating a <strong>Blacklisted</strong> Staff member will reset their
+                <strong>Approval Status</strong> to <strong>Pending</strong>.
             </p>
         </div>
     </div>
+    <hr>
 
     <!-- Search -->
     <div class="card shadow-sm mb-4">
@@ -124,8 +139,9 @@ Staff Management
                                 <div class="d-flex justify-content-center gap-2">
                                     <form method="POST" action="{{ url_for('admin.approve_staff', user_id=staff.id) }}">
 
-                                        <button type="submit" class="btn btn-sm btn-success-custom" 
-                                        {% if staff.staff_profile.approval_status=='Approved' or staff.status=='Blacklisted' %}disabled{% endif %}>
+                                        <button type="submit" class="btn btn-sm btn-success-custom" {% if
+                                            staff.staff_profile.approval_status=='Approved' or
+                                            staff.status=='Blacklisted' %}disabled{% endif %}>
                                             Approve
                                         </button>
 
@@ -133,8 +149,9 @@ Staff Management
 
                                     <form method="POST" action="{{ url_for('admin.reject_staff', user_id=staff.id) }}">
 
-                                        <button type="submit" class="btn btn-sm btn-danger-custom" 
-                                        {% if staff.staff_profile.approval_status=='Rejected' or staff.status=='Blacklisted' %}disabled{% endif %}>
+                                        <button type="submit" class="btn btn-sm btn-danger-custom" {% if
+                                            staff.staff_profile.approval_status=='Rejected' or
+                                            staff.status=='Blacklisted' %}disabled{% endif %}>
                                             Reject
                                         </button>
 
@@ -156,8 +173,8 @@ Staff Management
                                     <form method="POST"
                                         action="{{ url_for('admin.blacklist_staff', user_id=staff.id) }}">
 
-                                        <button type="submit" class="btn btn-sm btn-admin" 
-                                        {% if staff.status=='Blacklisted' %}disabled{% endif %}>
+                                        <button type="submit" class="btn btn-sm btn-admin" {% if
+                                            staff.status=='Blacklisted' %}disabled{% endif %}>
                                             Blacklist
                                         </button>
                                     </form>
@@ -165,8 +182,8 @@ Staff Management
                                     <form method="POST"
                                         action="{{ url_for('admin.activate_staff', user_id=staff.id) }}">
 
-                                        <button type="submit" class="btn btn-sm btn-activate-custom" 
-                                        {% if staff.status=='Active' %}disabled{% endif %}>
+                                        <button type="submit" class="btn btn-sm btn-activate-custom" {% if
+                                            staff.status=='Active' %}disabled{% endif %}>
                                             Activate
                                         </button>
                                     </form>
