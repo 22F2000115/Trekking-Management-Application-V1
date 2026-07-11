@@ -134,35 +134,29 @@ h1, h2, h3, h4, h5, h6 {
 /* Flash Messages Section */
 #flash-section {
     position: fixed;
-    bottom: 5rem;
-    right: 1.45rem;
+    top: 6rem;
+    right: 0.75rem;
     z-index: 1055;
     transform: scale(0.9);
-    transform-origin: bottom right;
 }
 
 #flash-section .alert {
-    border-radius: 8px;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
+    border: none;
+    font-size: 0.95rem;
 }
 
 #flash-section .alert-danger {
     background-color: var(--color-danger);
-    border: none;
     color: var(--color-surface);
 }
 
 #flash-section .alert-success {
     background-color: var(--color-success);
-    border: none;
     color: var(--color-surface);
 }
 
 #flash-section .alert-warning {
     background-color: var(--color-warning);
-    border: none;
     color: var(--color-text);
 }
 

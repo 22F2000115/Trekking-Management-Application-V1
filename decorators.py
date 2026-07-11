@@ -1,9 +1,8 @@
 from functools import wraps
     # Preserves original function name — prevents Flask route naming conflicts.
 from flask import abort, redirect, url_for, render_template, flash
-    # abort — Triggers custom 403 handler, redirect, url_for — Sends unauthenticated users to login.
+    # abort — Triggers custom 403 handler, defined in app.py which renders '403.html'.
 from flask_login import current_user, logout_user
-    # Logged-in user object.
     
     
 def admin_required(func):

@@ -3,7 +3,7 @@ from flask_login import UserMixin
     #! we use UserMixin from flask_login to add default implementations for user authentication methods:  is_authenticated is_active, is_anonymous, get_id().
     
 from datetime import datetime, timezone
-    #* We import 'datetime' and 'timezone' for using date and time in our models, especially for tracking when a user was created or last updated.
+    #* We import 'datetime' and 'timezone' for using date and time in our models, especially for preserving Booking and Trekking History !
     
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     bookings = db.relationship('Booking', backref = 'user')
         # one <==> many .
     assigned_treks = db.relationship('Trek', backref = 'assigned_staff', foreign_keys = 'Trek.assigned_staff_id')
-        # one <==> many relationship between User and Trek, where a staff member can be assigned to multiple treks. The 'foreign_keys' argument specifies which foreign key in the Trek model refers to the User model.
+        # one <==> many relationship between User and Trek, where a staff member can be assigned to multiple treks.
         
     
 class StaffProfile(db.Model):
