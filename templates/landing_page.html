@@ -4,20 +4,30 @@
 Home Page
 {% endblock %}
 
-{% block content %}
-<div class="auth-layout main-container">
-    <div class="text-center py-5">
+{% block styles %}
+<style>
+    #main-footer {
+        background-color: #0e1713;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.5);
+    }
+</style>
+{% endblock %}
 
-        <h1 class="display-3 fw-bold mb-0">
+{% block content %}
+<div class="landing-hero main-container">
+    <div class="landing-content">
+
+        <h1 class="fw-bold mb-0 landing-title">
             Adventure Awaits Beyond the Horizon
         </h1>
-        <hr>
-        <p class="lead mb-1 text-muted">
+        <hr class="landing-divider">
+        <p class="lead landing-lead">
             Discover breathtaking treks, book guided adventures, and explore the great outdoors.
         </p>
 
         <!-- Redirect Buttons -->
-        <div class="d-flex justify-content-center align-items-center gap-3 p-2">
+        <div class="d-flex justify-content-end align-items-center gap-3 p-0 landing-buttons">
 
             <a href="{{ url_for('auth.register_user') }}" class="btn btn-user">
                 <i class="bi bi-person-plus me-2"></i>
